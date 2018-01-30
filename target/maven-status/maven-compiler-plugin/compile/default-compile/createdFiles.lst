@@ -1,0 +1,15 @@
+br\com\magazinelabs\service\collection\ICollection.class
+br\com\magazinelabs\exception\ConnectionException.class
+br\com\magazinelabs\dao\MovieDAO.class
+br\com\magazinelabs\service\MovieService.class
+br\com\magazinelabs\util\Util.class
+br\com\magazinelabs\controller\SearchController.class
+br\com\magazinelabs\exception\SearchException.class
+br\com\magazinelabs\service\IMovieService.class
+br\com\magazinelabs\dao\BaseDAO.class
+br\com\magazinelabs\util\UtilConfigResource.class
+br\com\magazinelabs\controller\FilterSearch.class
+br\com\magazinelabs\exception\ResourceException.class
+br\com\magazinelabs\util\UtilResource.class
+br\com\magazinelabs\util\UtilFile.class
+br\com\magazinelabs\util\UtilMessageResource.class

@@ -1,0 +1,6 @@
+br\com\magazinelabs\util\UtilMessaResourceTest.class
+br\com\magazinelabs\util\UtilFileTest.class
+br\com\magazinelabs\dao\BaseDAOTest.class
+br\com\magazinelabs\util\UtilResourceTest.class
+br\com\magazinelabs\service\MovieServiceTest.class
+br\com\magazinelabs\controller\SearchControllerTest.class
