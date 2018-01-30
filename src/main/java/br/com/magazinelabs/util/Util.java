@@ -13,6 +13,25 @@ public class Util {
 		return obj != null;
 	}
 	
+	public static Boolean isNotNullAndEmpty(Object obj){
+		Boolean notNullEmpty = Boolean.FALSE;
+		
+		if(isNotNull(obj)){
+			
+			String classObj = obj.getClass().getName();
+			
+			if(classObj.equals(String.class.getName())){
+				String value = obj.toString();
+				
+				if(!value.trim().isEmpty())
+					notNullEmpty = Boolean.TRUE;
+				
+			}
+		}
+		
+		return notNullEmpty;
+	}
+	
 	public static Boolean isNull(Object obj){
 		return obj == null;
 	}

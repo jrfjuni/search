@@ -81,7 +81,7 @@ public class SearchController {
 	}
 	
 	/**
-	 * <p> M�todo respons�l em preencher o {@link FilterSearch} com os argumentos passados por par�metro
+	 * <p> M�todo responsável em preencher o {@link FilterSearch} com os argumentos passados por parâmetro
 	 * @param words
 	 * @param filter
 	 * @param term
@@ -100,13 +100,17 @@ public class SearchController {
 					
 					for (String wordSlipt : wordSplit) {
 						
-						if(!wordSlipt.isEmpty()){
+						if(Util.isNotNullAndEmpty(wordSlipt)){
 							filter.getWords().add(wordSlipt);
 							term.append(wordSlipt).append(" ");
 						}
 					}
 				}
 			}
+			
+			if(filter.getWords().isEmpty())
+				filterValid = Boolean.FALSE;
+			
 		}else
 			filterValid = Boolean.FALSE;
 		
