@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.299" errors="0" skipped="0" tests="6" name="br.com.magazinelabs.dao.BaseDAOTest">
+<testsuite failures="0" time="0.565" errors="0" skipped="0" tests="6" name="br.com.magazinelabs.dao.BaseDAOTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_79\jre\bin"/>
@@ -29,7 +29,7 @@
     <property name="os.name" value="Windows 7"/>
     <property name="classworlds.conf" value="C:\java\ferramentas\maven\bin\..\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.7.0_79\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\oracle\product\11.2.0\client_1\bin;C:\Oracle\product\11.2.0\client_32\bin;C:\Oracle\product\11.2.0\client_64\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\TortoiseSVN\bin;C:\java\ferramentas\maven\bin;C:\Program Files\nodejs\;C:\Users\jrfjuni\AppData\Roaming\npm;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.7.0_79\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\oracle\product\11.2.0\client_1\bin;C:\Oracle\product\11.2.0\client_32\bin;C:\Oracle\product\11.2.0\client_64\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\TortoiseSVN\bin;C:\java\ferramentas\maven\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\jrfjuni\AppData\Roaming\npm;C:\Users\jrfjuni\AppData\Local\GitHubDesktop\bin;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="51.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -63,9 +63,9 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase time="0" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testSaveElementListDocumentNull"/>
-  <testcase time="0.128" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testDropCollection"/>
-  <testcase time="0.157" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testCreateNewCollection"/>
-  <testcase time="0.014" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testCreateNewCollectionExist"/>
+  <testcase time="0.31" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testDropCollection"/>
+  <testcase time="0.246" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testCreateNewCollection"/>
+  <testcase time="0.009" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testCreateNewCollectionExist"/>
   <testcase time="0" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testSaveDocumentNull"/>
   <testcase time="0" classname="br.com.magazinelabs.dao.BaseDAOTest" name="testSaveListDocumentNull"/>
 </testsuite>
