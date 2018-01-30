@@ -18,6 +18,8 @@ MongoDB
 ## Execução
     
 1. Realize o download do projeto no git : https://github.com/jrfjuni/search.git
-2. Para iniciar o mongo, dentro do diretório onde o mesmo foi descompactado execute o seguinte comando: ./bin/mongod
+2. Antes de iniciar o mongo, copie a pasta 'dump' para dentro do diretório ./bin do mongoDB
+	1. Para iniciar o mongo, dentro do diretório ./bin onde o mesmo foi descompactado execute o seguinte comando: mongod
+	2. Com o mongo iniciado, abra um novo terminal e navegue até o diretório ./bin, e execute o seguinte comando: mongorestore dump
 3. No diretório onde foi descompactado o projeto acesse a pasta ./target e execute o comando:
     #### java -jar search.jar "palavras para busca"
