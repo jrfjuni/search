@@ -16,6 +16,7 @@ import org.bson.Document;
 
 import br.com.magazinelabs.comum.OperatingResult;
 import br.com.magazinelabs.controller.FilterSearch;
+import br.com.magazinelabs.exception.SearchException;
 
 /**
  * <p> CLASSE RESPONS�VEL EM REALIZAR OPERA��ES EM ARQUIVOS
@@ -30,8 +31,9 @@ public class UtilFile {
 	 * <p> M�todo responsável em recuperar arquivos de Movie (resource/filesmovies) e converter os mesmos para o tipo Document
 	 * 
 	 * @return List<Document>
+	 * @throws SearchException 
 	 */
-	public static List<Document> getDocumentsMovie() {
+	public static List<Document> getDocumentsMovie() throws SearchException {
 		List<Document> documents = new ArrayList<Document>();
 		
 		try {
@@ -59,12 +61,20 @@ public class UtilFile {
 			}
 			
 		} catch (Exception e) {
+			throw new SearchException(e.getMessage());
 		}
 		
 		return documents;
 	}
 	
-	public static OperatingResult getDocumentsByFilter(FilterSearch filterSearch){
+	/**
+	 * <p> Método responsável em validar de uma determinada lista de palavras estão presentes em algum dos arquivos de filme.
+	 * 
+	 * @param filterSearch
+	 * @return
+	 * @throws SearchException 
+	 */
+	public static OperatingResult getDocumentsByFilter(FilterSearch filterSearch) throws SearchException{
 		
 		OperatingResult operatingResult = new OperatingResult(Boolean.TRUE);
 		
@@ -85,6 +95,7 @@ public class UtilFile {
 					
 					  readLine = readLine.toLowerCase();
 						
+					 // Verifica se a linha em questão possui os termos buscados 
 					 if( Arrays.asList(readLine.split("\\s")).containsAll(filterSearch.getWords())){
 						 sb.append(PATH_FILE_MOVIES).append(file.getName()).append("\n");
 						 qty++;
@@ -102,13 +113,11 @@ public class UtilFile {
 			operatingResult.setExtraData(extraData);
 			
 		} catch (Exception e) {
-			
-			
+			throw new SearchException(e.getMessage());
 		}
 		
 		return operatingResult;
 	}
-	
 	
 	private static File[] getFilesMovies() throws URISyntaxException{
 		URL uri = Util.class.getResource("/resources/" +PATH_FILE_MOVIES);

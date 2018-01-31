@@ -9,10 +9,20 @@ import java.util.List;
  */
 public class Util {
 	
+	/**
+	 * <p> Método responsável em validar se um determinado Object não é Null
+	 * @param obj
+	 * @return
+	 */
 	public static Boolean isNotNull(Object obj){
 		return obj != null;
 	}
 	
+	/**
+	 * <p> Método responsável em validar se um determinado Object não é null e vazio
+	 * @param obj
+	 * @return
+	 */
 	public static Boolean isNotNullAndEmpty(Object obj){
 		Boolean notNullEmpty = Boolean.FALSE;
 		
@@ -32,11 +42,21 @@ public class Util {
 		return notNullEmpty;
 	}
 	
+	/**
+	 * <p> Método responsável em validar se um Object é null
+	 * @param obj
+	 * @return
+	 */
 	public static Boolean isNull(Object obj){
 		return obj == null;
 	}
 	
-	public static Boolean listIsNotNullAndEmpty(List<?> objets){
+	/**
+	 * <p> Método responsável em validar de uma determinada lista não é Null e vazia.
+	 * @param objets
+	 * @return
+	 */
+	public static Boolean listIsNotNullAndEmpty(List<? extends Object> objets){
 		Boolean isNot = Boolean.TRUE;
 		
 		if(isNotNull(objets) && !objets.isEmpty()){
