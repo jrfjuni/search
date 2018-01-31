@@ -12,7 +12,7 @@ MongoDB
 	- Mac : https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
 	- Linux(ubuntu) : https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 	
-	### OBS.: No Linux e no Mac quando iniciamos o mongo, por padrão, ele tenta acessar o diretório ./data/db, se o mesmo não 		existir, deverá ser criado e ter as permissões de acesso. Vide mais na documentação de instalação do mongo.
+	#### OBS.: No Linux e no Mac quando iniciamos o mongo, por padrão, ele tenta acessar o diretório ./data/db, se o mesmo não 		existir, deverá ser criado e ter as permissões de acesso. Vide mais na documentação de instalação do mongo.
 	
 
 ## Execução
