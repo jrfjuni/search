@@ -38,7 +38,7 @@ public class MovieService implements IMovieService {
 	}
 	
 	/**
-	 * <p> M�todo respons�vel em verificar e criar a Collection de MOVIE's
+	 * <p> Método responsável em verificar e criar a Collection de MOVIE's
 	 */
 	@SuppressWarnings("static-access")
 	private void createCollectionMovies() throws Exception{

@@ -1,19 +1,15 @@
 package br.com.magazinelabs.controller;
 
-import java.text.MessageFormat;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.bson.Document;
-
-import br.com.magazinelabs.exception.ResourceException;
+import br.com.magazinelabs.comum.OperatingResult;
 import br.com.magazinelabs.exception.SearchException;
 import br.com.magazinelabs.service.IMovieService;
 import br.com.magazinelabs.service.MovieService;
 import br.com.magazinelabs.util.Util;
 import br.com.magazinelabs.util.UtilFile;
-import br.com.magazinelabs.util.UtilMessageResource;
+import br.com.magazinelabs.util.UtilShowMessage;
 
 /**
  * 
@@ -29,23 +25,31 @@ public class SearchController {
 	public static void main(String[] args) throws SearchException  {
 		
 		mongoLogger.setLevel(Level.SEVERE);
-		
+
 		try {
 			
+			args = new String[]{"20088"};
 			FilterSearch filterSearch = new FilterSearch();
 			StringBuilder term = new StringBuilder();
 			
 			if(fillFilter(args, filterSearch, term)){
 				
-				List<Document> documents = getMovieService().findMoviesByFilter(filterSearch);
+				OperatingResult result = UtilFile.getDocumentsByFilter(filterSearch);
 				
-				if(Util.isNull(documents) || documents.isEmpty()) 
-					System.out.println(MessageFormat.format(UtilMessageResource.getMessage("msg.not.found.files"), term.toString().trim()));
-				else
-					showMessage(documents, term.toString().trim());
-				
-			}else
-				System.out.println(UtilMessageResource.getMessage("msg.required.term"));
+				if(result.getSuccess()){
+					
+					Integer qty = (Integer) result.getExtraData().get("qty");
+					String files = (String) result.getExtraData().get("files");
+					
+					if(qty > 0){
+						StringBuilder sb = UtilShowMessage.createMessageHeaderSuccessSearch(qty, term.toString());
+						sb.append(files);
+						System.out.println(sb.toString());
+					}else
+						UtilShowMessage.showMessageTermNotFound(term.toString());
+					
+				}
+			}
 			
 		} catch (Exception e) {
 			throw new SearchException(e.getMessage());
@@ -53,32 +57,56 @@ public class SearchController {
 	}
 	
 	/**
-	 * <p> M�todo respons�vel em exibir a mensagem referente a quantidade de ocorr�ncias encontradas na pesquisa e seus respectivos arquivos.
+	 * <p> Método responsável em realizar a busca dos arquivos no banco de dados do mongo.
+	 * 
+	 * @param args
+	 */
+//	@SuppressWarnings("unused")
+//	private static void findDb(String[] args) throws SearchException{
+//		
+//		try {
+//			
+//			FilterSearch filterSearch = new FilterSearch();
+//			StringBuilder term = new StringBuilder();
+//			
+//			if(fillFilter(args, filterSearch, term)){
+//				
+//				List<Document> documents = getMovieService().findMoviesByFilter(filterSearch);
+//				
+//				if(Util.isNull(documents) || documents.isEmpty()) 
+//					showMessaEmpty(term.toString());
+//				else
+//					showMessage(documents, term.toString().trim());
+//				
+//			}else
+//				System.out.println(UtilMessageResource.getMessage("msg.required.term"));
+//			
+//		} catch (Exception e) {
+//			throw new SearchException(e.getMessage());
+//		} 
+//	}
+	
+	
+	
+	/**
+	 * <p> M�todo responsável em exibir a mensagem referente a quantidade de ocorr�ncias encontradas na pesquisa e seus respectivos arquivos.
 	 * @param documents
 	 * @param term
 	 * @throws ResourceException
 	 */
-	private static void showMessage(List<Document> documents, String term) throws ResourceException {
-		
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append(MessageFormat.format(
-					UtilMessageResource.getMessage("msg.find.qty"), 
-					documents.size(), 
-					term
-				)).append("\n");
-		
-		sb.append(MessageFormat.format(
-					UtilMessageResource.getMessage("msg.find.files"), 
-					term
-		)).append("\n");
-		
-		for (Document document : documents) {
-			sb.append(UtilFile.PATH_FILE_MOVIES).append("/").append(document.get("file")).append("\n");
-		}
-		
-		System.out.println(sb.toString());
-	}
+//	private static void showMessage(List<Document> documents, String term) throws ResourceException {
+//		
+//		StringBuilder sb = new StringBuilder();
+//		
+//		
+//		
+//		for (Document document : documents) {
+//			sb.append(UtilFile.PATH_FILE_MOVIES).append("/").append(document.get("file")).append("\n");
+//		}
+//		
+//		System.out.println(sb.toString());
+//	}
+	
 	
 	/**
 	 * <p> M�todo responsável em preencher o {@link FilterSearch} com os argumentos passados por parâmetro
@@ -90,7 +118,6 @@ public class SearchController {
 	public static Boolean fillFilter(String[] words, FilterSearch filter, StringBuilder term) throws Exception {
 		Boolean filterValid = Boolean.TRUE;
 		
-		
 		if(Util.isNotNull(words) && words.length > 0) {
 			for (String word : words) {
 				
@@ -101,7 +128,7 @@ public class SearchController {
 					for (String wordSlipt : wordSplit) {
 						
 						if(Util.isNotNullAndEmpty(wordSlipt)){
-							filter.getWords().add(wordSlipt);
+							filter.getWords().add(wordSlipt.toLowerCase());
 							term.append(wordSlipt).append(" ");
 						}
 					}
@@ -117,6 +144,7 @@ public class SearchController {
 		return filterValid;
 	}
 	
+	@SuppressWarnings("unused")
 	private static IMovieService getMovieService() {
 		if (movieService == null) {
 			movieService = new MovieService();

@@ -11,11 +11,13 @@ import br.com.magazinelabs.exception.ResourceException;
  */
 public class UtilResource {
 	
+	private static final String PATH = "/resources/";
+	
 	private static Properties prop = new Properties();
 	
 	public static Properties getPropertie(String name) throws ResourceException {
 		try {
-			prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(name));
+			prop.load(UtilResource.class.getResourceAsStream(PATH + name));
 		} catch (Exception e) {
 			throw new ResourceException(e);
 		}

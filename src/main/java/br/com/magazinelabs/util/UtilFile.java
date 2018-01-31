@@ -4,14 +4,21 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bson.Document;
 
+import br.com.magazinelabs.comum.OperatingResult;
+import br.com.magazinelabs.controller.FilterSearch;
+
 /**
- * <p> CLASSE RESPONSÁVEL EM REALIZAR OPERAÇÕES EM ARQUIVOS
+ * <p> CLASSE RESPONSï¿½VEL EM REALIZAR OPERAï¿½ï¿½ES EM ARQUIVOS
  * @author Junnior
  *
  */
@@ -20,7 +27,7 @@ public class UtilFile {
 	public static final String PATH_FILE_MOVIES = "filesmovies";
 	
 	/**
-	 * <p> Método responsável em recuperar arquivos de Movie (resource/filesmovies) e converter os mesmos para o tipo Document
+	 * <p> Mï¿½todo responsÃ¡vel em recuperar arquivos de Movie (resource/filesmovies) e converter os mesmos para o tipo Document
 	 * 
 	 * @return List<Document>
 	 */
@@ -29,8 +36,7 @@ public class UtilFile {
 		
 		try {
 			
-			URL uri = Thread.currentThread().getContextClassLoader().getResource(PATH_FILE_MOVIES);
-			File[] files = new File(uri.toURI()).listFiles();
+			File[] files = getFilesMovies();
 						
 			for (File file : files) {
 				
@@ -53,9 +59,59 @@ public class UtilFile {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		
 		return documents;
+	}
+	
+	public static OperatingResult getDocumentsByFilter(FilterSearch filterSearch){
+		
+		OperatingResult operatingResult = new OperatingResult(Boolean.TRUE);
+		
+		try {
+			
+			StringBuilder sb = new StringBuilder();
+			File[] files = getFilesMovies();
+			Integer qty = 0;
+			
+			for (File file : files) {
+				
+				FileInputStream fileInputStream = new FileInputStream(file);
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+				
+				String readLine = "";
+				
+				while( (readLine = bufferedReader.readLine()) != null ){
+					
+					  readLine = readLine.toLowerCase();
+						
+					 if( Arrays.asList(readLine.split("\\s")).containsAll(filterSearch.getWords())){
+						 sb.append(PATH_FILE_MOVIES).append(file.getName()).append("\n");
+						 qty++;
+					 }
+				} 
+				
+				fileInputStream.close();
+				bufferedReader.close();
+			}
+			
+			Map<String, Object> extraData = new HashMap<String, Object>();
+			extraData.put("files", sb.toString());
+			extraData.put("qty", qty);
+			
+			operatingResult.setExtraData(extraData);
+			
+		} catch (Exception e) {
+			
+			
+		}
+		
+		return operatingResult;
+	}
+	
+	
+	private static File[] getFilesMovies() throws URISyntaxException{
+		URL uri = Util.class.getResource("/resources/" +PATH_FILE_MOVIES);
+		return new File(uri.toURI()).listFiles();
 	}
 }

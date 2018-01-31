@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Built-By: JRFJUNI
+Build-Jdk: 1.7.0_79
+Class-Path: libs/mongo-java-driver-3.6.1.jar
+Main-Class: br.com.magazinelabs.controller.SearchController
+Created-By: Maven Integration for Eclipse
+
