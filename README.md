@@ -25,4 +25,5 @@ MongoDB
 
 # OBS.: A EXECUÇÃO ATRAVÉS DO MONGO FOI DESCONTINUADA, PARA REALIZAÇÃO DAS BUSCAS ATRAVÉS DE SENTENÇA, É NECESSÁRIO SOMENTE A EXECUÇÃO DO CÓDIGO ABAIXO.
 
+3. No diretório onde foi descompactado o projeto acesse a pasta ./target e execute o comando:
    #### java -jar search.jar "palavras para busca"
