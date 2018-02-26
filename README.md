@@ -25,4 +25,4 @@ MongoDB
 
 # OBS.: A EXECUÇÃO ATRAVÉS DO MONGO FOI DESCONTINUADA, PARA REALIZAÇÃO DAS BUSCAS ATRAVÉS DE SENTENÇA, É NECESSÁRIO SOMENTE A EXECUÇÃO DO CÓDIGO ABAIXO.
 
-    #### java -jar search.jar "palavras para busca"
+   #### java -jar search.jar "palavras para busca"
