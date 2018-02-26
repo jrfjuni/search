@@ -30,7 +30,6 @@ public class SearchController {
 
 		try {
 			
-			args = new String[]{"2006"};
 			FilterSearch filterSearch = new FilterSearch();
 			StringBuilder term = new StringBuilder();
 			
