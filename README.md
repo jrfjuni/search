@@ -22,4 +22,7 @@ MongoDB
 	1. Para iniciar o mongo, dentro do diretório ./bin onde o mesmo foi descompactado execute o seguinte comando: mongod
 	2. Com o mongo iniciado, abra um novo terminal e navegue até o diretório ./bin, e execute o seguinte comando: mongorestore dump
 3. No diretório onde foi descompactado o projeto acesse a pasta ./target e execute o comando:
+
+# OBS.: A EXECUÇÃO ATRAVÉS DO MONGO FOI DESCONTINUADA, PARA REALIZAÇÃO DAS BUSCAS ATRAVÉS DE SENTENÇA, É NECESSÁRIO SOMENTE A EXECUÇÃO DO CÓDIGO ABAIXO.
+
     #### java -jar search.jar "palavras para busca"
