@@ -17,7 +17,6 @@ public class SearchControllerTest {
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	
-
 	@Test
 	public void testFillFilterNull() throws Exception{
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -30,7 +29,6 @@ public class SearchControllerTest {
 		Assert.assertTrue(expectMessage.equalsIgnoreCase(out.toString().trim()));
 	}
 	
-	
 	@Test
 	public void testFindMoviesByFilterNotFound() throws Exception{
 		
@@ -39,9 +37,6 @@ public class SearchControllerTest {
 		
 		String term = "abcdefghij";
 		String expectMessage = MessageFormat.format(UtilMessageResource.getMessage("msg.not.found.files"), term);
-		
-		FilterSearch filterSearch = new FilterSearch();
-		filterSearch.getWords().add(term);
 		
 		SearchController.main(new String[]{term});
 		
@@ -57,7 +52,6 @@ public class SearchControllerTest {
 		} catch (SearchException e) {
 			ex = e;
 		}
-		
 		
 		Assert.assertNull(ex);
 	}

@@ -1,5 +1,6 @@
 package br.com.magazinelabs.controller;
 
+import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,6 +10,7 @@ import br.com.magazinelabs.service.IMovieService;
 import br.com.magazinelabs.service.MovieService;
 import br.com.magazinelabs.util.Util;
 import br.com.magazinelabs.util.UtilFile;
+import br.com.magazinelabs.util.UtilMessageResource;
 import br.com.magazinelabs.util.UtilShowMessage;
 
 /**
@@ -28,17 +30,17 @@ public class SearchController {
 
 		try {
 			
-			args = new String[]{"20088"};
+			args = new String[]{"2006"};
 			FilterSearch filterSearch = new FilterSearch();
 			StringBuilder term = new StringBuilder();
 			
 			if(fillFilter(args, filterSearch, term)){
 				
-				OperatingResult result = UtilFile.getDocumentsByFilter(filterSearch);
+				OperatingResult result = UtilFile.findWordsResource(filterSearch.getWords(), SearchController.class, UtilFile.PATH_FILE_MOVIES, Boolean.FALSE);;
 				
 				if(result.getSuccess()){
 					
-					Integer qty = (Integer) result.getExtraData().get("qty");
+					Integer qty = (Integer) result.getExtraData().get("qtyFiles");
 					String files = (String) result.getExtraData().get("files");
 					
 					if(qty > 0){
@@ -46,67 +48,16 @@ public class SearchController {
 						sb.append(files);
 						System.out.println(sb.toString());
 					}else
-						UtilShowMessage.showMessageTermNotFound(term.toString());
+						System.out.println(MessageFormat.format(UtilMessageResource.getMessage("msg.not.found.files"), term.toString().trim()));
 					
 				}
-			}
+			}else
+				System.out.println(UtilMessageResource.getMessage("msg.required.term"));
 			
 		} catch (Exception e) {
 			throw new SearchException(e.getMessage());
 		} 
-	}
-	
-	/**
-	 * <p> Método responsável em realizar a busca dos arquivos no banco de dados do mongo.
-	 * 
-	 * @param args
-	 */
-//	@SuppressWarnings("unused")
-//	private static void findDb(String[] args) throws SearchException{
-//		
-//		try {
-//			
-//			FilterSearch filterSearch = new FilterSearch();
-//			StringBuilder term = new StringBuilder();
-//			
-//			if(fillFilter(args, filterSearch, term)){
-//				
-//				List<Document> documents = getMovieService().findMoviesByFilter(filterSearch);
-//				
-//				if(Util.isNull(documents) || documents.isEmpty()) 
-//					showMessaEmpty(term.toString());
-//				else
-//					showMessage(documents, term.toString().trim());
-//				
-//			}else
-//				System.out.println(UtilMessageResource.getMessage("msg.required.term"));
-//			
-//		} catch (Exception e) {
-//			throw new SearchException(e.getMessage());
-//		} 
-//	}
-	
-	
-	
-	/**
-	 * <p> M�todo responsável em exibir a mensagem referente a quantidade de ocorr�ncias encontradas na pesquisa e seus respectivos arquivos.
-	 * @param documents
-	 * @param term
-	 * @throws ResourceException
-	 */
-//	private static void showMessage(List<Document> documents, String term) throws ResourceException {
-//		
-//		StringBuilder sb = new StringBuilder();
-//		
-//		
-//		
-//		for (Document document : documents) {
-//			sb.append(UtilFile.PATH_FILE_MOVIES).append("/").append(document.get("file")).append("\n");
-//		}
-//		
-//		System.out.println(sb.toString());
-//	}
-	
+	}	
 	
 	/**
 	 * <p> M�todo responsável em preencher o {@link FilterSearch} com os argumentos passados por parâmetro

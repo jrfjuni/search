@@ -11,7 +11,6 @@ import br.com.magazinelabs.dao.MovieDAO;
 import br.com.magazinelabs.exception.SearchException;
 import br.com.magazinelabs.service.collection.ICollection;
 import br.com.magazinelabs.util.Util;
-import br.com.magazinelabs.util.UtilFile;
 import br.com.magazinelabs.util.UtilMessageResource;
 
 /**
@@ -46,7 +45,7 @@ public class MovieService implements IMovieService {
 		if(!getMovieDAO().collectionExists(ICollection.COLLECTION_MOVIE)){
 			System.out.println(MessageFormat.format(UtilMessageResource.getMessage("msg.create.collection"), ICollection.COLLECTION_MOVIE));
 			getMovieDAO().createCollection(ICollection.COLLECTION_MOVIE);
-			save(UtilFile.getDocumentsMovie());
+			//save(UtilFile.getDocumentsMovie());
 		}
 	}
 	
